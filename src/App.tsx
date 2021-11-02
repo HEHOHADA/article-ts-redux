@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
-function App() {
+import { Filter, Articles } from 'ui/article'
+import { setData } from 'store/article'
+
+import mockData from './MOCK_DATA.json'
+
+export function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setData(mockData))
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main className='h-screen w-10/12 m-auto mt-10'>
+      <div className='flex w-full h-full max-h-cal content-area rounded-b'>
+        <div className='w-1/5 h-screen relative hidden xl:block'>
+          <div className='flex justify-between'>
+            <h2 className='mt-1 mr-1 text-blue-200'>Articles</h2>
+          </div>
+          <Filter />
+        </div>
+        <Articles />
+      </div>
+    </main>
+  )
 }
-
-export default App;
